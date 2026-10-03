@@ -38,7 +38,8 @@ const DEFAULTS = {
     askWhereToSave: true
   },
   bookmarks: [],
-  customThemes: []
+  customThemes: [],
+  welcomeShown: false
 };
 
 function deepMerge(target, patch) {

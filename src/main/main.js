@@ -10,6 +10,7 @@ const { WindowManager } = require('./windowManager');
 const { installPrivacyDefaults, loadTrackingLists } = require('./privacy');
 const { Settings } = require('./settings');
 const { DownloadsManager } = require('./downloads');
+const { installExtension, listInstalled, removeExtension, restorePersistedExtensions, KNOWN: KNOWN_EXTENSIONS } = require('./extensions');
 
 // Harden the GPU / renderer process a little by default. Users who need
 // legacy flags can toggle them from settings later.
@@ -36,8 +37,16 @@ async function bootstrap() {
 
   downloads = new DownloadsManager(defaultSession, settings);
 
+  // Reload any extensions the user installed on a previous run.
+  await restorePersistedExtensions();
+
   windowManager = new WindowManager({ settings, lists, downloads });
-  await windowManager.createNormalWindow();
+
+  // On first ever launch, show the welcome overlay so the user can opt
+  // into uBlock Origin, pick a theme and set a search engine before
+  // browsing. The shell renderer reads this flag off its window query.
+  const showWelcome = !settings.all().welcomeShown;
+  await windowManager.createNormalWindow({ showWelcome });
 
   registerIpc();
 }
@@ -75,6 +84,13 @@ function registerIpc() {
   ipcMain.handle('bookmarks:list', () => settings.bookmarks());
   ipcMain.handle('bookmarks:add', (_e, bm) => settings.addBookmark(bm));
   ipcMain.handle('bookmarks:remove', (_e, id) => settings.removeBookmark(id));
+
+  ipcMain.handle('extensions:catalog', () => Object.entries(KNOWN_EXTENSIONS).map(([k, v]) => ({ key: k, name: v.name })));
+  ipcMain.handle('extensions:install', (_e, key) => installExtension(key));
+  ipcMain.handle('extensions:list', () => listInstalled());
+  ipcMain.handle('extensions:remove', (_e, id) => removeExtension(id));
+
+  ipcMain.handle('welcome:complete', () => settings.update({ welcomeShown: true }));
 
   ipcMain.handle('app:open-external', (_e, url) => {
     // Only open http/https externally; avoid shell-exec via file:// or other schemes.

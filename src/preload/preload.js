@@ -9,12 +9,31 @@ const winId = params.get('winId');
 const privateMode = params.get('privateMode') === 'true';
 const partition = params.get('partition');
 const initialTheme = params.get('theme');
+const showWelcome = params.get('welcome') === 'true';
 
 contextBridge.exposeInMainWorld('zip', {
   winId,
   privateMode,
   partition,
   initialTheme,
+  showWelcome,
+
+  extensions: {
+    catalog: () => ipcRenderer.invoke('extensions:catalog'),
+    install: (key) => ipcRenderer.invoke('extensions:install', key),
+    list: () => ipcRenderer.invoke('extensions:list'),
+    remove: (id) => ipcRenderer.invoke('extensions:remove', id)
+  },
+
+  welcome: {
+    complete: () => ipcRenderer.invoke('welcome:complete')
+  },
+
+  internal: {
+    onOpen: (fn) => ipcRenderer.on('internal:open', (_e, p) => fn(p))
+  },
+
+
 
   tabs: {
     create: (opts) => ipcRenderer.invoke('tabs:create', winId, opts || {}),

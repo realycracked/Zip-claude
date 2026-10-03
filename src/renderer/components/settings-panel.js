@@ -49,10 +49,35 @@
         case 'themes': return this._renderThemes();
         case 'search': return this._renderSearch();
         case 'downloads': return this._renderDownloads();
+        case 'extensions': return this._renderExtensions();
         case 'advanced': return this._renderAdvanced();
         case 'about': return this._renderAbout();
       }
       return '';
+    }
+
+    _renderExtensions() {
+      return `
+        <h3>Extensions</h3>
+        <p class="muted">Zip can load Chromium-format extensions. Only
+          vetted sources are allowed — new ones must be added by a
+          developer in <code>src/main/extensions.js</code>.</p>
+        <div class="welcome-card" style="margin-top:16px;">
+          <header>
+            <div class="welcome-icon">◈</div>
+            <div>
+              <h2>uBlock Origin</h2>
+              <p>Install or reinstall from <code>github.com/gorhill/uBlock</code>.</p>
+            </div>
+          </header>
+          <div class="welcome-card-actions">
+            <button class="btn-primary" id="ext-install-ublock">Install / reinstall</button>
+          </div>
+          <div class="welcome-status" id="ext-status" hidden></div>
+        </div>
+        <h3>Installed</h3>
+        <div class="ext-list" id="ext-installed"></div>
+      `;
     }
 
     _renderGeneral() {
@@ -229,6 +254,49 @@
       if (tab === 'downloads') {
         this.content.querySelector('#ask-save').addEventListener('change', (e) => api.set({ downloads: { askWhereToSave: e.target.checked } }));
         this.content.querySelector('#dl-dir').addEventListener('change', (e) => api.set({ downloads: { defaultDir: e.target.value } }));
+      }
+      if (tab === 'extensions') {
+        const extApi = window.zip.extensions;
+        const list = this.content.querySelector('#ext-installed');
+        const status = this.content.querySelector('#ext-status');
+        const refresh = async () => {
+          const items = await extApi.list();
+          list.innerHTML = items.length ? items.map((it) => `
+            <div class="ext-item">
+              <div>
+                <strong>${esc(it.name)}</strong> <small>v${esc(it.version)}</small>
+                <br /><small>${esc(it.id)}</small>
+              </div>
+              <button class="danger" data-remove="${esc(it.id)}">Remove</button>
+            </div>
+          `).join('') : '<p class="muted">No extensions installed.</p>';
+          list.querySelectorAll('[data-remove]').forEach((btn) => {
+            btn.addEventListener('click', async () => {
+              await extApi.remove(btn.dataset.remove);
+              refresh();
+            });
+          });
+        };
+        this.content.querySelector('#ext-install-ublock').addEventListener('click', async (e) => {
+          const btn = e.currentTarget;
+          btn.disabled = true;
+          const prev = btn.textContent;
+          btn.textContent = 'Installing…';
+          status.hidden = false; status.className = 'welcome-status welcome-status--info';
+          status.textContent = 'Fetching latest release from github.com/gorhill/uBlock…';
+          try {
+            const info = await extApi.install('ublock');
+            status.className = 'welcome-status welcome-status--ok';
+            status.textContent = `uBlock Origin ${info.version} installed.`;
+          } catch (err) {
+            status.className = 'welcome-status welcome-status--err';
+            status.textContent = `Install failed: ${err.message || err}`;
+          }
+          btn.textContent = prev;
+          btn.disabled = false;
+          refresh();
+        });
+        refresh();
       }
       if (tab === 'advanced') {
         this.content.querySelector('#clear-cache-exit').addEventListener('change', (e) => api.set({ clearOnExit: { cache: e.target.checked } }));

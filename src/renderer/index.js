@@ -3,7 +3,7 @@
 // Glues the chrome controls to the main-process API exposed via preload.
 
 (function () {
-  const { tabs, settings, window: zipWindow, downloads, privacy, bookmarks, system, app } = window.zip;
+  const { tabs, settings, window: zipWindow, downloads, privacy, bookmarks, system, app, extensions, welcome } = window.zip;
   const privateMode = window.zip.privateMode;
   document.body.dataset.private = String(privateMode);
 
@@ -18,10 +18,26 @@
       .join(' ');
   }
 
+  function openWelcome() {
+    new window.ZipWelcomeOverlay({
+      root: document.getElementById('welcome-overlay'),
+      api: { settings, extensions, welcome },
+      onThemeChange: applyTheme,
+      onClose: () => { /* nothing — overlay hides itself */ }
+    });
+  }
+
   (async () => {
     const cfg = await settings.get();
     await applyTheme(cfg.theme || window.zip.initialTheme || 'hacker');
+    if (window.zip.showWelcome) openWelcome();
   })();
+
+  // about:welcome and about:settings open panels, not web pages.
+  window.zip.internal.onOpen(({ page }) => {
+    if (page === 'welcome') openWelcome();
+    else if (page === 'settings') settingsPanel.open('general');
+  });
 
   // Tab strip --------------------------------------------------------------
   const tabStrip = new window.ZipTabStrip({

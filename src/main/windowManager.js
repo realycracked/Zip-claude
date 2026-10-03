@@ -43,15 +43,15 @@ class WindowManager {
     this.maxHistory = 5000;
   }
 
-  async createNormalWindow(_opts = {}) {
-    return this._createWindow({ privateMode: false });
+  async createNormalWindow(opts = {}) {
+    return this._createWindow({ privateMode: false, showWelcome: !!opts.showWelcome });
   }
 
   async createPrivateWindow() {
     return this._createWindow({ privateMode: true });
   }
 
-  async _createWindow({ privateMode }) {
+  async _createWindow({ privateMode, showWelcome = false }) {
     const id = newId();
     const partition = privateMode
       ? createPartitionName({ ephemeral: true })
@@ -101,14 +101,16 @@ class WindowManager {
         winId: id,
         privateMode: String(privateMode),
         theme: this.settings.theme(),
-        partition
+        partition,
+        welcome: String(showWelcome)
       }
     });
 
     win.show();
 
     // Open a first tab by default.
-    await this.createTab(id, { url: this.settings.homepage() || START_PAGE });
+    const firstUrl = this.settings.homepage() || START_PAGE;
+    await this.createTab(id, { url: firstUrl });
 
     return id;
   }
@@ -279,6 +281,17 @@ class WindowManager {
     const zw = this._getWindow(winId);
     const tab = zw.tabs.get(tabId);
     if (!tab) return false;
+    const trimmed = String(input || '').trim().toLowerCase();
+    // Firefox-style internal pages. These are routed to the chrome, not to
+    // the tab's webContents, because they need privileged IPC access.
+    if (trimmed === 'about:welcome' || trimmed === 'about:zip') {
+      zw.win.webContents.send('internal:open', { page: 'welcome' });
+      return true;
+    }
+    if (trimmed === 'about:settings' || trimmed === 'about:preferences') {
+      zw.win.webContents.send('internal:open', { page: 'settings' });
+      return true;
+    }
     const url = this._resolveInput(input);
     tab.view.webContents.loadURL(url);
     return true;
