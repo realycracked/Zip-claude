@@ -1,0 +1,22 @@
+/* Theme — Arch Linux. Clean cyan on deep slate. */
+:root {
+  --bg: #0f1419;
+  --fg: #c5d1d9;
+  --accent: #1793d1;
+  --accent-glow: rgba(23, 147, 209, 0.3);
+  --on-accent: #ffffff;
+  --muted: #6b7984;
+  --chrome: #141c23;
+  --tab-bg: #1a2730;
+  --tab-active: #253646;
+  --tab-hover: #1f3040;
+  --omni: #1a2730;
+  --omni-focus: #253646;
+  --panel-bg: #141c23;
+  --border: rgba(197, 209, 217, 0.08);
+  --danger: #e06c75;
+  --private-chrome: #091015;
+  --private-omni: #0f1419;
+  --private-border: #c678dd;
+  --font-chrome: 'JetBrains Mono', 'Fira Code', ui-monospace, Menlo, monospace;
+}

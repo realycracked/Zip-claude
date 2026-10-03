@@ -1,0 +1,55 @@
+From: Zip Browser contributors
+Subject: [PATCH] Flip about:config to Zip privacy defaults
+
+Changes browser/app/profile/firefox.js so a brand-new profile ships with
+Zip's privacy posture — no telemetry, DoH on, RFP + FPI on, GPC + DNT on,
+HTTPS-only on, WebRTC leaks closed.
+
+The upstream file is a long list of pref() calls; this patch overrides
+them without removing Mozilla's own defaults, so upstream merges stay easy.
+
+diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
+--- a/browser/app/profile/firefox.js
++++ b/browser/app/profile/firefox.js
+@@ -0,0 +0,0 @@
++// --- Zip Browser overrides ---------------------------------------------
++pref("privacy.resistFingerprinting",                    true);
++pref("privacy.firstparty.isolate",                      true);
++pref("privacy.trackingprotection.enabled",              true);
++pref("privacy.trackingprotection.pbmode.enabled",       true);
++pref("privacy.trackingprotection.socialtracking.enabled", true);
++pref("privacy.donottrackheader.enabled",                true);
++pref("privacy.globalprivacycontrol.enabled",            true);
++pref("privacy.globalprivacycontrol.functionality.enabled", true);
++pref("network.cookie.cookieBehavior",                   5);
++pref("network.http.referer.XOriginTrimmingPolicy",      2);
++pref("network.http.referer.XOriginPolicy",              2);
++pref("network.trr.mode",                                2);
++pref("network.trr.uri",                                 "https://mozilla.cloudflare-dns.com/dns-query");
++pref("dom.security.https_only_mode",                    true);
++pref("dom.security.https_only_mode_pbm",                true);
++pref("browser.safebrowsing.downloads.remote.enabled",   false);
++pref("media.peerconnection.ice.default_address_only",   true);
++pref("media.peerconnection.ice.no_host",                true);
++pref("geo.enabled",                                     false);
++pref("browser.send_pings",                              false);
++pref("beacon.enabled",                                  false);
++pref("app.shield.optoutstudies.enabled",                false);
++pref("app.normandy.enabled",                            false);
++pref("datareporting.healthreport.uploadEnabled",        false);
++pref("datareporting.policy.dataSubmissionEnabled",      false);
++pref("toolkit.telemetry.enabled",                       false);
++pref("toolkit.telemetry.unified",                       false);
++pref("toolkit.telemetry.archive.enabled",               false);
++pref("toolkit.telemetry.newProfilePing.enabled",        false);
++pref("toolkit.telemetry.shutdownPingSender.enabled",    false);
++pref("toolkit.telemetry.updatePing.enabled",            false);
++pref("toolkit.telemetry.bhrPing.enabled",               false);
++pref("toolkit.telemetry.firstShutdownPing.enabled",     false);
++pref("breakpad.reportURL",                              "");
++pref("browser.aboutHomeSnippets.updateUrl",             "");
++pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
++pref("browser.newtabpage.activity-stream.telemetry",    false);
++pref("extensions.pocket.enabled",                       false);
++pref("identity.fxaccounts.enabled",                     false);
++pref("services.sync.enabled",                           false);

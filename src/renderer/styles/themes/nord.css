@@ -1,0 +1,22 @@
+/* Theme — Nord. Cool arctic blues. */
+:root {
+  --bg: #2e3440;
+  --fg: #eceff4;
+  --accent: #88c0d0;
+  --accent-glow: rgba(136, 192, 208, 0.3);
+  --on-accent: #2e3440;
+  --muted: #4c566a;
+  --chrome: #3b4252;
+  --tab-bg: #434c5e;
+  --tab-active: #4c566a;
+  --tab-hover: #46506b;
+  --omni: #434c5e;
+  --omni-focus: #4c566a;
+  --panel-bg: #3b4252;
+  --border: rgba(216, 222, 233, 0.1);
+  --danger: #bf616a;
+  --private-chrome: #292e39;
+  --private-omni: #3b4252;
+  --private-border: #b48ead;
+  --font-chrome: 'Inter', 'SF Pro Text', ui-sans-serif, system-ui, sans-serif;
+}

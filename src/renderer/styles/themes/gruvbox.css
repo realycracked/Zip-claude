@@ -1,0 +1,22 @@
+/* Theme — Gruvbox. Warm, earthy retro. */
+:root {
+  --bg: #282828;
+  --fg: #ebdbb2;
+  --accent: #d79921;
+  --accent-glow: rgba(215, 153, 33, 0.3);
+  --on-accent: #282828;
+  --muted: #928374;
+  --chrome: #1d2021;
+  --tab-bg: #32302f;
+  --tab-active: #3c3836;
+  --tab-hover: #353332;
+  --omni: #3c3836;
+  --omni-focus: #504945;
+  --panel-bg: #1d2021;
+  --border: rgba(235, 219, 178, 0.08);
+  --danger: #cc241d;
+  --private-chrome: #121313;
+  --private-omni: #282828;
+  --private-border: #b16286;
+  --font-chrome: 'JetBrains Mono', 'Fira Code', ui-monospace, Menlo, monospace;
+}

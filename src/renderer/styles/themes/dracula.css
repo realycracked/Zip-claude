@@ -1,0 +1,22 @@
+/* Theme — Dracula. Legible dark palette with purple accents. */
+:root {
+  --bg: #282a36;
+  --fg: #f8f8f2;
+  --accent: #bd93f9;
+  --accent-glow: rgba(189, 147, 249, 0.3);
+  --on-accent: #282a36;
+  --muted: #6272a4;
+  --chrome: #21222c;
+  --tab-bg: #282a36;
+  --tab-active: #44475a;
+  --tab-hover: #353746;
+  --omni: #343746;
+  --omni-focus: #44475a;
+  --panel-bg: #21222c;
+  --border: rgba(248, 248, 242, 0.08);
+  --danger: #ff5555;
+  --private-chrome: #191a21;
+  --private-omni: #21222c;
+  --private-border: #ff79c6;
+  --font-chrome: 'JetBrains Mono', 'Fira Code', ui-monospace, Menlo, monospace;
+}

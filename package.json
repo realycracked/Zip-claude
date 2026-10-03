@@ -1,0 +1,53 @@
+{
+  "name": "zip-browser",
+  "version": "0.1.0",
+  "description": "Zip Browser — a fast, reliable, privacy-focused desktop browser with 10+ themes and strong anonymity defaults.",
+  "main": "src/main/main.js",
+  "author": "Zip Browser contributors",
+  "license": "MPL-2.0",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --inspect",
+    "fetch-lists": "node scripts/fetch-trackers.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dist:linux": "electron-builder --linux",
+    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win",
+    "lint": "eslint src --ext .js",
+    "test": "node --test test/"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^25.0.0",
+    "eslint": "^9.0.0"
+  },
+  "build": {
+    "appId": "org.zipbrowser.app",
+    "productName": "Zip Browser",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Network;WebBrowser"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  }
+}
