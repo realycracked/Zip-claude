@@ -1,0 +1,30 @@
+# Zip Browser — mozconfig
+# Flags Mozilla's build system reads to produce a Zip-branded Gecko build.
+
+ac_add_options --enable-application=browser
+ac_add_options --with-branding=browser/branding/zip
+ac_add_options --with-app-name=zip-browser
+ac_add_options --with-app-basename=ZipBrowser
+ac_add_options --with-distribution-id=org.zipbrowser
+
+# Privacy-first build options.
+ac_add_options --disable-crashreporter
+ac_add_options --disable-updater
+ac_add_options --disable-parental-controls
+ac_add_options --disable-eme
+ac_add_options --disable-pings
+
+# Keep debug info out of release builds; artifact builds override.
+ac_add_options --disable-tests
+
+# Standard release optimisation.
+ac_add_options --enable-optimize
+ac_add_options --enable-release
+
+# Localisation defaults.
+ac_add_options --with-l10n-base=../l10n
+
+export MOZ_TELEMETRY_REPORTING=
+export MOZ_DATA_REPORTING=
+export MOZ_SERVICES_HEALTHREPORT=
+export MOZ_NORMANDY=

@@ -1,0 +1,25 @@
+/* Theme — Firefox Classic. Familiar Firefox-style chrome. */
+:root {
+  --bg: #20123a;
+  --fg: #f9f9fb;
+  --accent: #ff7139;
+  --accent-glow: rgba(255, 113, 57, 0.3);
+  --on-accent: #20123a;
+  --muted: #cfcfd8;
+  --chrome: #1c1b22;
+  --tab-bg: #2b2a33;
+  --tab-active: #42414d;
+  --tab-hover: #35343f;
+  --omni: #2b2a33;
+  --omni-focus: #42414d;
+  --panel-bg: #1c1b22;
+  --border: rgba(249, 249, 251, 0.08);
+  --danger: #ff4a4a;
+  --private-chrome: #20123a;
+  --private-omni: #2e1a4f;
+  --private-border: #a085f4;
+  --font-chrome: -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+.tab { border-top-left-radius: 6px; border-top-right-radius: 6px; }
+.omnibar { border-radius: 6px; background: var(--omni); border: 1px solid var(--border); }
+.omnibar:focus-within { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow); }

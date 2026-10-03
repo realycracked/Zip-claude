@@ -1,0 +1,31 @@
+/* Theme — RGB Gamer. Neon red/purple with scanline accents. */
+:root {
+  --bg: #05000c;
+  --fg: #f5f0ff;
+  --accent: #ff003c;
+  --accent-glow: rgba(255, 0, 60, 0.35);
+  --on-accent: #ffffff;
+  --muted: #8c6a9c;
+  --chrome: linear-gradient(180deg, #140024 0%, #0a0010 100%);
+  --tab-bg: rgba(255, 255, 255, 0.03);
+  --tab-active: rgba(255, 0, 60, 0.1);
+  --tab-hover: rgba(160, 32, 240, 0.12);
+  --omni: #110020;
+  --omni-focus: #1a0033;
+  --panel-bg: #0a0010;
+  --border: rgba(255, 0, 60, 0.22);
+  --danger: #ffcc00;
+  --private-chrome: linear-gradient(180deg, #000020, #140024);
+  --private-omni: #1a0033;
+  --private-border: #00ffe1;
+  --font-chrome: 'Orbitron', 'Rajdhani', ui-sans-serif, system-ui, sans-serif;
+}
+body {
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.01) 0 1px, transparent 1px 3px),
+    radial-gradient(600px 300px at 50% 0%, rgba(160, 32, 240, 0.2), transparent 70%),
+    var(--bg);
+}
+.tab.is-active { box-shadow: inset 0 2px 0 var(--accent), 0 0 24px -4px var(--accent); }
+.omnibar:focus-within { box-shadow: 0 0 0 2px var(--accent), 0 0 20px var(--accent-glow); }
+.nav-btn:hover:not(:disabled), .icon-btn:hover, .omni-icon:hover { color: #a020f0; }

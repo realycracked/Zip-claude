@@ -1,0 +1,16 @@
+node_modules/
+dist/
+out/
+.cache/
+*.log
+.DS_Store
+.env
+.env.local
+.vscode/
+.idea/
+*.swp
+*.swo
+coverage/
+.nyc_output/
+firefox-fork/mozilla-unified/
+firefox-fork/obj-*/

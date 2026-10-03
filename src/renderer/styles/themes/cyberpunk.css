@@ -1,0 +1,26 @@
+/* Theme — Cyberpunk 2088. Hot pink + cyan neon. */
+:root {
+  --bg: #0f0a2e;
+  --fg: #e0f7fa;
+  --accent: #ff2a6d;
+  --accent-glow: rgba(255, 42, 109, 0.4);
+  --on-accent: #0f0a2e;
+  --muted: #8a95b1;
+  --chrome: linear-gradient(180deg, #1a0b3d 0%, #0f0a2e 100%);
+  --tab-bg: rgba(255, 255, 255, 0.03);
+  --tab-active: rgba(5, 217, 232, 0.08);
+  --tab-hover: rgba(255, 42, 109, 0.1);
+  --omni: #1a0b3d;
+  --omni-focus: #210f4a;
+  --panel-bg: #0f0a2e;
+  --border: rgba(5, 217, 232, 0.2);
+  --danger: #ffd600;
+  --private-chrome: linear-gradient(180deg, #0a0025, #000018);
+  --private-omni: #15003a;
+  --private-border: #05d9e8;
+  --font-chrome: 'Orbitron', 'Rajdhani', ui-sans-serif, system-ui, sans-serif;
+}
+.omnibar:focus-within { box-shadow: 0 0 0 2px #05d9e8, 0 0 24px rgba(5, 217, 232, 0.4); border-color: #05d9e8; }
+.tab.is-active { box-shadow: inset 0 2px 0 var(--accent), 0 0 24px -5px #05d9e8; }
+#url-input { color: #05d9e8; }
+.icon-btn:hover, .nav-btn:hover:not(:disabled), .omni-icon:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent); }

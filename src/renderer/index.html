@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Zip Browser</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self';" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <link id="theme-stylesheet" rel="stylesheet" href="styles/themes/hacker.css" />
+</head>
+<body class="theme-hacker" data-private="false">
+  <div id="chrome" class="chrome">
+    <div class="chrome-row chrome-row--top">
+      <div class="window-controls" aria-hidden="true"></div>
+      <div class="tab-strip" id="tab-strip" role="tablist" aria-label="Tabs"></div>
+      <button class="tab-new" id="new-tab-btn" title="New tab (Ctrl+T)" aria-label="New tab">+</button>
+      <div class="chrome-spacer"></div>
+      <button class="icon-btn" id="private-btn" title="New private window">
+        <span class="icon">◉</span>
+      </button>
+      <button class="icon-btn" id="downloads-btn" title="Downloads">
+        <span class="icon">▼</span>
+        <span class="badge" id="downloads-badge" hidden>0</span>
+      </button>
+      <button class="icon-btn" id="menu-btn" title="Menu">
+        <span class="icon">≡</span>
+      </button>
+    </div>
+    <div class="chrome-row chrome-row--bottom">
+      <button class="nav-btn" id="back-btn" title="Back (Alt+Left)" disabled>‹</button>
+      <button class="nav-btn" id="forward-btn" title="Forward (Alt+Right)" disabled>›</button>
+      <button class="nav-btn" id="reload-btn" title="Reload (Ctrl+R)">↻</button>
+      <div class="omnibar" id="omnibar">
+        <button class="security-indicator" id="security-indicator" title="Site information">
+          <span class="lock" id="lock-icon">🔒</span>
+        </button>
+        <input
+          id="url-input"
+          type="text"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+          placeholder="Search or type a URL — your choice stays private"
+          aria-label="Address and search bar"
+        />
+        <button class="omni-icon" id="shield-btn" title="Tracking protection">
+          <span class="shield">◈</span>
+          <span class="counter" id="blocked-counter" hidden>0</span>
+        </button>
+        <button class="omni-icon" id="bookmark-btn" title="Bookmark this page">★</button>
+      </div>
+      <button class="nav-btn" id="devtools-btn" title="Developer tools (F12)">{ }</button>
+    </div>
+  </div>
+
+  <div class="panel panel--right" id="downloads-panel" hidden>
+    <header><h2>Downloads</h2><button class="close-x" data-close="downloads-panel">×</button></header>
+    <div class="panel-body" id="downloads-list"></div>
+    <footer><button id="clear-downloads">Clear finished</button></footer>
+  </div>
+
+  <div class="panel panel--right" id="menu-panel" hidden>
+    <header><h2>Zip Browser</h2><button class="close-x" data-close="menu-panel">×</button></header>
+    <nav class="panel-body menu">
+      <button data-action="new-tab">New tab <kbd>Ctrl+T</kbd></button>
+      <button data-action="new-window">New window <kbd>Ctrl+N</kbd></button>
+      <button data-action="new-private">New private window <kbd>Ctrl+Shift+P</kbd></button>
+      <hr />
+      <button data-action="bookmarks">Bookmarks</button>
+      <button data-action="history">History</button>
+      <button data-action="downloads">Downloads <kbd>Ctrl+J</kbd></button>
+      <hr />
+      <button data-action="settings">Settings</button>
+      <button data-action="themes">Themes</button>
+      <button data-action="devtools">Developer tools <kbd>F12</kbd></button>
+      <hr />
+      <button data-action="about">About Zip Browser</button>
+    </nav>
+  </div>
+
+  <div class="panel panel--full" id="settings-panel" hidden>
+    <header>
+      <h2>Settings</h2>
+      <button class="close-x" data-close="settings-panel">×</button>
+    </header>
+    <div class="settings-layout">
+      <aside class="settings-nav">
+        <button class="active" data-tab="general">General</button>
+        <button data-tab="privacy">Privacy &amp; security</button>
+        <button data-tab="themes">Themes</button>
+        <button data-tab="search">Search engines</button>
+        <button data-tab="downloads">Downloads</button>
+        <button data-tab="extensions">Extensions</button>
+        <button data-tab="advanced">Advanced</button>
+        <button data-tab="about">About</button>
+      </aside>
+      <section class="settings-content" id="settings-content">
+        <!-- populated by JS -->
+      </section>
+    </div>
+  </div>
+
+  <div class="panel panel--full" id="site-info-panel" hidden>
+    <header><h2>Site information</h2><button class="close-x" data-close="site-info-panel">×</button></header>
+    <div class="panel-body" id="site-info-body"></div>
+  </div>
+
+  <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
+
+  <div class="welcome-overlay" id="welcome-overlay" hidden></div>
+
+  <script src="components/omnibar.js"></script>
+  <script src="components/tabs.js"></script>
+  <script src="components/downloads-panel.js"></script>
+  <script src="components/settings-panel.js"></script>
+  <script src="components/welcome-overlay.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

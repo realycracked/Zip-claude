@@ -1,0 +1,26 @@
+/* Theme — Minimal Light. White, flat, library quiet. */
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --accent: #111111;
+  --accent-glow: rgba(0, 0, 0, 0.08);
+  --on-accent: #ffffff;
+  --muted: #8a8a8a;
+  --chrome: #ffffff;
+  --tab-bg: #f3f3f3;
+  --tab-active: #ffffff;
+  --tab-hover: #ececec;
+  --omni: #f3f3f3;
+  --omni-focus: #ffffff;
+  --panel-bg: #ffffff;
+  --border: rgba(0, 0, 0, 0.08);
+  --danger: #d00000;
+  --private-chrome: #1a1a1a;
+  --private-omni: #262626;
+  --private-border: #cccccc;
+  --font-chrome: 'Inter', -apple-system, 'SF Pro Text', ui-sans-serif, system-ui, sans-serif;
+  color-scheme: light;
+}
+.chrome { border-bottom: 1px solid var(--border); box-shadow: 0 1px 0 var(--border); }
+.tab.is-active { box-shadow: inset 0 2px 0 var(--accent); }
+.omnibar { border: 1px solid var(--border); }

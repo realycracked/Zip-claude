@@ -1,0 +1,22 @@
+/* Theme — Ubuntu Aubergine. Orange on aubergine. */
+:root {
+  --bg: #2c001e;
+  --fg: #ffffff;
+  --accent: #e95420;
+  --accent-glow: rgba(233, 84, 32, 0.3);
+  --on-accent: #ffffff;
+  --muted: #c8adc0;
+  --chrome: #300a24;
+  --tab-bg: #3c0f2c;
+  --tab-active: #4d1337;
+  --tab-hover: #44112f;
+  --omni: #3c0f2c;
+  --omni-focus: #4d1337;
+  --panel-bg: #2c001e;
+  --border: rgba(255, 255, 255, 0.1);
+  --danger: #ef2929;
+  --private-chrome: #1a0010;
+  --private-omni: #2c001e;
+  --private-border: #ad7fa8;
+  --font-chrome: 'Ubuntu', ui-sans-serif, system-ui, sans-serif;
+}

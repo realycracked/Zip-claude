@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Zip Browser — Start</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:;" />
+  <style>
+    :root {
+      --bg: #0b0d0e;
+      --fg: #e9efe4;
+      --accent: #39ff14;
+      --muted: #7a8a79;
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      background: radial-gradient(1200px 600px at 50% -10%, #10231a 0%, var(--bg) 60%);
+      color: var(--fg);
+      font-family: ui-monospace, 'JetBrains Mono', 'Fira Code', Menlo, Consolas, monospace;
+    }
+    main {
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 48px 24px;
+    }
+    .wrap { max-width: 760px; text-align: center; }
+    .logo {
+      font-size: 72px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      color: var(--accent);
+      text-shadow: 0 0 24px rgba(57, 255, 20, 0.25);
+      font-family: inherit;
+    }
+    .logo span { color: var(--fg); }
+    .tag { color: var(--muted); margin: 12px 0 36px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    a.tile {
+      display: block;
+      padding: 14px 12px;
+      border: 1px solid rgba(233, 239, 228, 0.08);
+      border-radius: 10px;
+      color: var(--fg);
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.02);
+      transition: all 160ms ease;
+    }
+    a.tile:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(57, 255, 20, 0.12);
+    }
+    .tile strong { display: block; margin-bottom: 2px; }
+    .tile small { color: var(--muted); font-size: 11px; }
+    footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
+    kbd {
+      font-family: inherit;
+      padding: 1px 6px;
+      border: 1px solid var(--muted);
+      border-radius: 4px;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <div class="logo">ZIP<span>://</span></div>
+      <p class="tag">A fast, reliable, privacy-focused browser · no telemetry · no profile sync</p>
+      <div class="grid">
+        <a class="tile" href="https://duckduckgo.com/"><strong>DuckDuckGo</strong><small>Private search</small></a>
+        <a class="tile" href="https://search.brave.com/"><strong>Brave Search</strong><small>Independent index</small></a>
+        <a class="tile" href="https://www.startpage.com/"><strong>Startpage</strong><small>Private Google proxy</small></a>
+        <a class="tile" href="https://en.wikipedia.org/"><strong>Wikipedia</strong><small>The open encyclopedia</small></a>
+        <a class="tile" href="https://github.com/"><strong>GitHub</strong><small>Code and projects</small></a>
+        <a class="tile" href="https://developer.mozilla.org/"><strong>MDN</strong><small>Web platform docs</small></a>
+      </div>
+      <footer>
+        <p>Press <kbd>Ctrl</kbd>+<kbd>L</kbd> to focus the address bar · <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> for a private window</p>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
